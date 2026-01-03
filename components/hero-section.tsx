@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Mic, AlertTriangle, ArrowRight, Sparkles, Shield, Award, CheckCircle2, Users } from "lucide-react"
+import { Mic, AlertTriangle, ArrowRight, Sparkles, Shield, Award, CheckCircle2 } from "lucide-react"
 import { motion } from "framer-motion"
 
 const ModelViewer = dynamic(() => import("@/components/model-viewer"), {
@@ -103,32 +103,6 @@ export default function HeroSection() {
                   <span className="text-sm font-medium text-muted-foreground">{badge.label}</span>
                 </div>
               ))}
-            </motion.div>
-
-            {/* Social proof */}
-            <motion.div 
-              className="flex items-center gap-6 pt-2"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 border-2 border-background flex items-center justify-center text-xs font-semibold text-primary shadow-sm"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <div className="flex items-center gap-1">
-                  <Users className="w-4 h-4 text-primary" />
-                  <span className="font-bold text-foreground">10,000+</span>
-                </div>
-                <span className="text-muted-foreground">users trust MidAi</span>
-              </div>
             </motion.div>
           </motion.div>
 

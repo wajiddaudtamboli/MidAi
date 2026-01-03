@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Heart, Mail, Phone, MapPin } from "lucide-react"
+import { Heart, Mail, Phone, MapPin, Users } from "lucide-react"
 
 const footerLinks = {
   product: [
@@ -40,18 +40,22 @@ export default function Footer() {
               Your AI healthcare assistant. Get instant health guidance, connect with doctors, and access emergency
               support anytime.
             </p>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>support@midai.health</span>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center gap-2 text-primary font-semibold">
+                <Users className="w-4 h-4" />
+                <span>Contact Us - Team Dipex</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+91 1800-XXX-XXXX (Toll Free)</span>
+              <div className="flex items-center gap-2 text-foreground">
+                <MapPin className="w-4 h-4 text-muted-foreground" />
+                <span>N.K. Orchid College of Engineering & Technology, Solapur</span>
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Bangalore, India</span>
+              <div className="flex items-center gap-2 text-foreground">
+                <Phone className="w-4 h-4 text-muted-foreground" />
+                <span>+91 9667033839</span>
+              </div>
+              <div className="flex items-center gap-2 text-foreground">
+                <Mail className="w-4 h-4 text-muted-foreground" />
+                <span>wajidtamboli@orchidengg.ac.in</span>
               </div>
             </div>
           </div>
@@ -100,8 +104,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">© 2025 MidAi Healthcare. All rights reserved.</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground">© 2026 MidAi Healthcare by Team Dipex. All rights reserved.</p>
+          <p className="text-sm text-foreground">
             Made with <Heart className="w-4 h-4 inline text-destructive" /> for better healthcare
           </p>
         </div>
