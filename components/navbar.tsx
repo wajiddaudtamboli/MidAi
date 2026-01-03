@@ -4,9 +4,11 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Heart, Phone, ArrowRight } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Menu, Heart, Phone, ArrowRight, User, LogOut, Settings, History } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
+import { useAuth } from "@/contexts/auth-context"
 
 const navLinks = [
   { href: "#features", label: "Features" },
@@ -18,6 +20,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,15 +81,55 @@ export default function Navbar() {
           <div className="w-px h-6 bg-border" />
           
           <ThemeToggle />
-          <Button variant="ghost" size="sm" asChild className="font-medium">
-            <Link href="/login">Sign In</Link>
-          </Button>
-          <Button size="sm" asChild className="gap-1.5 font-medium">
-            <Link href="/register">
-              Get Started
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </Button>
+          
+          {isAuthenticated && user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2 font-medium">
+                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                    <User className="w-4 h-4 text-primary" />
+                  </div>
+                  {user.name.split(' ')[0]}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-2 py-1.5">
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="cursor-pointer">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/history" className="cursor-pointer">
+                    <History className="w-4 h-4 mr-2" />
+                    History
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout} className="cursor-pointer text-destructive">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" asChild className="font-medium">
+                <Link href="/login">Sign In</Link>
+              </Button>
+              <Button size="sm" asChild className="gap-1.5 font-medium">
+                <Link href="/register">
+                  Get Started
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Navigation */}
@@ -140,12 +183,39 @@ export default function Navbar() {
                 
                 {/* Mobile footer actions */}
                 <div className="p-6 border-t border-border space-y-3">
-                  <Button variant="outline" asChild className="w-full h-12 text-base">
-                    <Link href="/login">Sign In</Link>
-                  </Button>
-                  <Button asChild className="w-full h-12 text-base">
-                    <Link href="/register">Get Started</Link>
-                  </Button>
+                  {isAuthenticated && user ? (
+                    <>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                          <User className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">{user.name}</p>
+                          <p className="text-xs text-muted-foreground">{user.email}</p>
+                        </div>
+                      </div>
+                      <Button variant="outline" asChild className="w-full h-12 text-base">
+                        <Link href="/dashboard">Dashboard</Link>
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        className="w-full h-12 text-base text-destructive hover:text-destructive"
+                        onClick={() => { logout(); setIsOpen(false); }}
+                      >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="outline" asChild className="w-full h-12 text-base">
+                        <Link href="/login">Sign In</Link>
+                      </Button>
+                      <Button asChild className="w-full h-12 text-base">
+                        <Link href="/register">Get Started</Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </SheetContent>
