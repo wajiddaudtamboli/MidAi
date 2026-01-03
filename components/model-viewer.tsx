@@ -3,13 +3,44 @@
 import { Suspense, useRef, useState, useEffect } from "react"
 import { Heart } from "lucide-react"
 
-// Lazy load Three.js components only on client
+// Pre-loaded modules cache for faster reload
 let Canvas: any = null
 let OrbitControls: any = null
 let useGLTF: any = null
 let Environment: any = null
 let Float: any = null
 let useFrame: any = null
+let modulesReady = false
+let loadPromise: Promise<void> | null = null
+
+// Preload modules immediately
+const preloadThreeModules = () => {
+  if (modulesReady || loadPromise) return loadPromise
+  
+  loadPromise = Promise.all([
+    import("@react-three/fiber"),
+    import("@react-three/drei")
+  ]).then(([fiber, drei]) => {
+    Canvas = fiber.Canvas
+    useFrame = fiber.useFrame
+    OrbitControls = drei.OrbitControls
+    useGLTF = drei.useGLTF
+    Environment = drei.Environment
+    Float = drei.Float
+    modulesReady = true
+    // Preload the model
+    drei.useGLTF.preload("/models/medical-model.glb")
+  }).catch(e => {
+    console.error("Failed to load Three.js:", e)
+  })
+  
+  return loadPromise
+}
+
+// Start preloading when module loads
+if (typeof window !== 'undefined') {
+  preloadThreeModules()
+}
 
 function SimpleFallback() {
   return (
@@ -23,29 +54,18 @@ function SimpleFallback() {
 }
 
 function ThreeScene() {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(modulesReady)
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
-    const loadThree = async () => {
-      try {
-        const [fiber, drei] = await Promise.all([
-          import("@react-three/fiber"),
-          import("@react-three/drei")
-        ])
-        Canvas = fiber.Canvas
-        useFrame = fiber.useFrame
-        OrbitControls = drei.OrbitControls
-        useGLTF = drei.useGLTF
-        Environment = drei.Environment
-        Float = drei.Float
-        setIsLoaded(true)
-      } catch (e) {
-        console.error("Failed to load Three.js:", e)
-        setHasError(true)
-      }
+    if (modulesReady) {
+      setIsLoaded(true)
+      return
     }
-    loadThree()
+    
+    preloadThreeModules()?.then(() => {
+      if (modulesReady) setIsLoaded(true)
+    }).catch(() => setHasError(true))
   }, [])
 
   if (hasError) {

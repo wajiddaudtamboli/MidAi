@@ -3,34 +3,52 @@
 import { useRef, useMemo, useState, useEffect } from "react"
 import type * as THREE from "three"
 
-// Lazy loaded components
+// Pre-loaded modules cache
 let useFrame: any = null
 let useGLTF: any = null
 let Float: any = null
 let THREELib: any = null
+let modulesLoaded = false
+let loadingPromise: Promise<void> | null = null
+
+// Preload function to start loading immediately
+const preloadModules = () => {
+    if (modulesLoaded || loadingPromise) return loadingPromise
+    
+    loadingPromise = Promise.all([
+        import("@react-three/fiber"),
+        import("@react-three/drei"),
+        import("three")
+    ]).then(([fiber, drei, three]) => {
+        useFrame = fiber.useFrame
+        useGLTF = drei.useGLTF
+        Float = drei.Float
+        THREELib = three
+        modulesLoaded = true
+        // Preload the heart model
+        drei.useGLTF.preload("/models/heart.glb")
+    }).catch(e => {
+        console.error("Failed to load Three.js deps:", e)
+    })
+    
+    return loadingPromise
+}
+
+// Start preloading immediately when module is imported
+if (typeof window !== 'undefined') {
+    preloadModules()
+}
 
 export function HeartModel() {
-    const [isLoaded, setIsLoaded] = useState(false)
-    const modelRef = useRef<THREE.Group>(null)
+    const [isLoaded, setIsLoaded] = useState(modulesLoaded)
 
     useEffect(() => {
-        const loadDeps = async () => {
-            try {
-                const [fiber, drei, three] = await Promise.all([
-                    import("@react-three/fiber"),
-                    import("@react-three/drei"),
-                    import("three")
-                ])
-                useFrame = fiber.useFrame
-                useGLTF = drei.useGLTF
-                Float = drei.Float
-                THREELib = three
-                setIsLoaded(true)
-            } catch (e) {
-                console.error("Failed to load Three.js deps:", e)
-            }
+        if (modulesLoaded) {
+            setIsLoaded(true)
+            return
         }
-        loadDeps()
+        
+        preloadModules()?.then(() => setIsLoaded(true))
     }, [])
 
     if (!isLoaded || !useGLTF) {

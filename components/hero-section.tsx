@@ -29,8 +29,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content - Value Proposition */}
           <motion.div 
             className="space-y-8"
