@@ -83,11 +83,11 @@ const itemVariants = {
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-20 md:py-28 bg-muted/30">
+    <section id="features" className="py-12 md:py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Section header */}
         <motion.div 
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

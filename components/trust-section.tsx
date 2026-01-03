@@ -46,14 +46,14 @@ const doctors = [
 
 export default function TrustSection() {
     return (
-        <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+        <section className="py-12 md:py-16 bg-background relative overflow-hidden">
             {/* Background pattern */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
             
             <div className="container mx-auto px-4 relative z-10">
                 {/* Section header */}
                 <motion.div 
-                    className="text-center mb-16"
+                    className="text-center mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -72,7 +72,7 @@ export default function TrustSection() {
 
                 {/* Trust cards */}
                 <motion.div 
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -103,7 +103,7 @@ export default function TrustSection() {
 
                 {/* Certifications bar */}
                 <motion.div 
-                    className="flex flex-wrap justify-center items-center gap-8 py-8 px-6 rounded-2xl bg-muted/50 border border-border mb-16"
+                    className="flex flex-wrap justify-center items-center gap-8 py-6 px-6 rounded-2xl bg-muted/50 border border-border mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

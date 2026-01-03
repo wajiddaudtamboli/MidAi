@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 
 export default function CTASection() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-12 md:py-16">
       <div className="container mx-auto px-4">
         <motion.div 
           className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary via-primary to-accent p-8 md:p-16"

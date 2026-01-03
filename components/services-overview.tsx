@@ -38,9 +38,9 @@ const services = [
 
 export default function ServicesOverview() {
     return (
-        <section className="py-24 bg-card/50">
+        <section className="py-12 md:py-16 bg-card/50">
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
+                <div className="flex flex-col md:flex-row items-end justify-between mb-10 gap-4">
                     <div className="max-w-2xl">
                         <h2 className="text-3xl md:text-5xl font-bold mb-6">Innovative AI Services</h2>
                         <p className="text-lg text-muted-foreground">
