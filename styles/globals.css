@@ -5,25 +5,25 @@
 @layer base {
   :root {
     /* Premium Light Mode - Clean Medical SaaS */
-    --background: 210 20% 98%; /* Soft off-white #F9FAFB */
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%; /* Pure white for better contrast */
+    --foreground: 222 47% 11%; /* Darker text for readability */
     --card: 0 0% 100%; /* Pure white cards */
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142 76% 36%; /* Medical green #16A34A */
+    --popover-foreground: 222 47% 11%;
+    --primary: 142 76% 32%; /* Deeper medical green for better visibility */
     --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 168 76% 36%; /* Teal accent */
+    --muted-foreground: 215 25% 35%; /* Darker muted text for readability */
+    --accent: 168 76% 32%; /* Deeper teal accent */
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142 76% 36%;
+    --border: 214 32% 85%; /* Slightly darker borders */
+    --input: 214 32% 85%;
+    --ring: 142 76% 32%;
     --radius: 0.75rem;
     --chart-1: 142 76% 36%;
     --chart-2: 168 76% 36%;

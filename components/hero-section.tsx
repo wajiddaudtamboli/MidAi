@@ -40,7 +40,7 @@ export default function HeroSection() {
           >
             {/* Badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/15 text-primary text-sm font-semibold border border-primary/30 shadow-sm"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -56,7 +56,7 @@ export default function HeroSection() {
                 <span className="text-gradient">AI Healthcare</span>{" "}
                 Assistant
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
+              <p className="text-lg md:text-xl text-foreground/80 max-w-xl leading-relaxed">
                 Get instant health guidance with voice-powered symptom checking, video consultations with certified doctors, and 24/7 emergency support.
               </p>
             </div>
@@ -97,10 +97,10 @@ export default function HeroSection() {
               {trustBadges.map((badge, i) => (
                 <div 
                   key={badge.label}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/50 border border-border/50"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border shadow-sm"
                 >
                   <badge.icon className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-muted-foreground">{badge.label}</span>
+                  <span className="text-sm font-medium text-foreground">{badge.label}</span>
                 </div>
               ))}
             </motion.div>
