@@ -1,7 +1,6 @@
-# MidAi - AI-Powered Healthcare Assistant
+# MidAi - AI-Powered Healthcare Assistant (DIPEX)
 
 <div align="center">
-  <img src="public/logo.png" alt="MidAi Logo" width="120" />
   
   <h3>🏥 Your Trusted AI Healthcare Assistant</h3>
   <p>Premium medical-grade healthcare platform with voice-powered symptom checking, video consultations with certified doctors, and 24/7 emergency support.</p>
@@ -12,7 +11,7 @@
   [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/)
   [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-  [Live Demo](https://midai.vercel.app) · [Report Bug](https://github.com/wajiddaudtamboli/MidAi/issues) · [Request Feature](https://github.com/wajiddaudtamboli/MidAi/issues)
+  [Live Demo]([https://midai.vercel.app](https://mid-ai-alpha.vercel.app/)) · [Report Bug](https://github.com/wajiddaudtamboli/MidAi/issues) · [Request Feature](https://github.com/wajiddaudtamboli/MidAi/issues)
 </div>
 
 ---
@@ -140,13 +139,6 @@ npm run start
 |----------|-------------|----------|
 | `OPENAI_API_KEY` | OpenAI API key for AI features | Yes (for AI) |
 
-## 📸 Screenshots
-
-<div align="center">
-  <img src="docs/screenshot-dark.png" alt="Dark Mode" width="45%" />
-  <img src="docs/screenshot-light.png" alt="Light Mode" width="45%" />
-</div>
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -157,16 +149,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 👨‍💻 Author
+---
 
-**Bhaskar** - [@Bhaskar2522](https://github.com/Bhaskar2522)
+---
+## 👨‍💻 Under Supervision
 
-## 🙏 Acknowledgments
-
-- [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
-- [Vercel](https://vercel.com) for hosting and AI SDK
-- [OpenAI](https://openai.com) for GPT-4 API
-
+**Viteshkumar Gaikwad**
 ---
 
 ## 👥 Contributors
@@ -178,14 +166,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
         <img src="https://github.com/Bhaskar2522.png" width="100px;" alt="Bhaskar"/><br />
         <sub><b>Bhaskar</b></sub>
       </a><br />
-      <sub>Lead Developer</sub>
+      <sub>Full Stack Developer</sub>
     </td>
     <td align="center">
       <a href="https://github.com/wajiddaudtamboli">
         <img src="https://github.com/wajiddaudtamboli.png" width="100px;" alt="Wajid Daud Tamboli"/><br />
         <sub><b>Wajid Daud Tamboli</b></sub>
       </a><br />
-      <sub>UI/UX & Frontend</sub>
+      <sub>Full Stack Developer</sub>
     </td>
   </tr>
 </table>
@@ -193,7 +181,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ---
 
 <div align="center">
-  Made with ❤️ for better healthcare
+  Made for DIPEX
   
   **MidAi** - Your Trusted AI Healthcare Companion
 </div>
