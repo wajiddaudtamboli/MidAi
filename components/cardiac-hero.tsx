@@ -1,13 +1,76 @@
 "use client"
 
-import { Canvas } from "@react-three/fiber"
-import { Environment, OrbitControls, ContactShadows } from "@react-three/drei"
-import { Suspense } from "react"
+import { Suspense, useState, useEffect } from "react"
 import { HeartModel } from "@/components/heart-model"
 import { motion } from "framer-motion"
 import LiquidEther from "@/components/ui/liquid-ether"
+import { Heart } from "lucide-react"
+
+// Lazy load Three.js components
+let Canvas: any = null
+let Environment: any = null
+let OrbitControls: any = null
+let ContactShadows: any = null
+
+function ThreeScene() {
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        const loadThree = async () => {
+            try {
+                const [fiber, drei] = await Promise.all([
+                    import("@react-three/fiber"),
+                    import("@react-three/drei")
+                ])
+                Canvas = fiber.Canvas
+                Environment = drei.Environment
+                OrbitControls = drei.OrbitControls
+                ContactShadows = drei.ContactShadows
+                setIsLoaded(true)
+            } catch (e) {
+                console.error("Failed to load Three.js:", e)
+            }
+        }
+        loadThree()
+    }, [])
+
+    if (!isLoaded || !Canvas) {
+        return (
+            <div className="w-full h-full flex items-center justify-center">
+                <Heart className="w-32 h-32 text-white/50 animate-pulse" />
+            </div>
+        )
+    }
+
+    return (
+        <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
+            <ambientLight intensity={1.5} />
+            <spotLight position={[10, 20, 10]} angle={0.15} penumbra={1} intensity={2} />
+            <pointLight position={[-10, -5, -5]} color="#A5D1FD" intensity={2} />
+
+            <Suspense fallback={null}>
+                <HeartModel />
+                <Environment preset="night" />
+                <ContactShadows position={[0, -2.5, 0]} opacity={0.6} scale={15} blur={2.5} far={10} />
+            </Suspense>
+
+            <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                minPolarAngle={Math.PI / 2.5}
+                maxPolarAngle={Math.PI / 1.5}
+            />
+        </Canvas>
+    )
+}
 
 export default function CardiacHero() {
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
     return (
         <section className="relative w-full h-screen bg-[#80B3D5] overflow-hidden flex flex-col items-center justify-center">
             {/* Liquid Ether Animated Background */}
@@ -35,24 +98,11 @@ export default function CardiacHero() {
 
             {/* 3D Scene */}
             <div className="absolute inset-0 z-10">
-                <Canvas camera={{ position: [0, 0, 8], fov: 35 }}>
-                    <ambientLight intensity={1.5} />
-                    <spotLight position={[10, 20, 10]} angle={0.15} penumbra={1} intensity={2} />
-                    <pointLight position={[-10, -5, -5]} color="#A5D1FD" intensity={2} />
-
-                    <Suspense fallback={null}>
-                        <HeartModel />
-                        <Environment preset="night" />
-                        <ContactShadows position={[0, -2.5, 0]} opacity={0.6} scale={15} blur={2.5} far={10} />
-                    </Suspense>
-
-                    <OrbitControls
-                        enableZoom={false}
-                        enablePan={false}
-                        minPolarAngle={Math.PI / 2.5}
-                        maxPolarAngle={Math.PI / 1.5}
-                    />
-                </Canvas>
+                {mounted ? <ThreeScene /> : (
+                    <div className="w-full h-full flex items-center justify-center">
+                        <Heart className="w-32 h-32 text-white/50 animate-pulse" />
+                    </div>
+                )}
             </div>
 
             {/* Hero Text Overlay */}

@@ -1,18 +1,53 @@
 "use client"
 
-import { useRef, useMemo } from "react"
-import { useFrame } from "@react-three/fiber"
-import { useGLTF, Float } from "@react-three/drei"
-import * as THREE from "three"
+import { useRef, useMemo, useState, useEffect } from "react"
+import type * as THREE from "three"
+
+// Lazy loaded components
+let useFrame: any = null
+let useGLTF: any = null
+let Float: any = null
+let THREELib: any = null
 
 export function HeartModel() {
-    const { scene } = useGLTF("/models/heart.glb")
+    const [isLoaded, setIsLoaded] = useState(false)
     const modelRef = useRef<THREE.Group>(null)
+
+    useEffect(() => {
+        const loadDeps = async () => {
+            try {
+                const [fiber, drei, three] = await Promise.all([
+                    import("@react-three/fiber"),
+                    import("@react-three/drei"),
+                    import("three")
+                ])
+                useFrame = fiber.useFrame
+                useGLTF = drei.useGLTF
+                Float = drei.Float
+                THREELib = three
+                setIsLoaded(true)
+            } catch (e) {
+                console.error("Failed to load Three.js deps:", e)
+            }
+        }
+        loadDeps()
+    }, [])
+
+    if (!isLoaded || !useGLTF) {
+        return null
+    }
+
+    return <HeartModelInner />
+}
+
+function HeartModelInner() {
+    const { scene } = useGLTF("/models/heart.glb")
+    const modelRef = useRef<any>(null)
 
     // Clone scene to avoid shared state if used multiple times
     const clonedScene = useMemo(() => scene.clone(), [scene])
 
-    useFrame((state) => {
+    useFrame((state: any) => {
         if (modelRef.current) {
             const time = state.clock.elapsedTime
 
@@ -32,10 +67,10 @@ export function HeartModel() {
 
     // Apply glass material
     useMemo(() => {
-        clonedScene.traverse((child) => {
-            if ((child as THREE.Mesh).isMesh) {
-                const mesh = child as THREE.Mesh
-                mesh.material = new THREE.MeshPhysicalMaterial({
+        if (!THREELib) return
+        clonedScene.traverse((child: any) => {
+            if (child.isMesh) {
+                child.material = new THREELib.MeshPhysicalMaterial({
                     color: "#E3F2FD",
                     metalness: 0,
                     roughness: 0.02,
@@ -53,6 +88,8 @@ export function HeartModel() {
             }
         })
     }, [clonedScene])
+
+    if (!Float) return null
 
     return (
         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>

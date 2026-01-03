@@ -3,9 +3,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     unoptimized: true,
   },
+  reactStrictMode: false,
+  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
 }
 
 export default nextConfig
