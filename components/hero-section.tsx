@@ -24,7 +24,7 @@ const trustBadges = [
 
 export default function HeroSection() {
   return (
-    <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
+    <section className="relative pt-4 pb-8 md:pt-6 md:pb-12 lg:pt-8 lg:pb-16 overflow-hidden">
       {/* Premium background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
