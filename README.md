@@ -10,8 +10,6 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
   [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com/)
   [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-  [Live Demo]([https://midai.vercel.app](https://mid-ai-alpha.vercel.app/)) · [Report Bug](https://github.com/wajiddaudtamboli/MidAi/issues) · [Request Feature](https://github.com/wajiddaudtamboli/MidAi/issues)
 </div>
 
 ---
